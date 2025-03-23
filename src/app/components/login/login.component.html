@@ -1,0 +1,64 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Login to weever bird</h2>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="loginData.email"
+          required
+          email
+          #email="ngModel"
+          placeholder="Enter your email"
+        />
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+          <span *ngIf="email.errors?.['required']">Email is required</span>
+          <span *ngIf="email.errors?.['email']">Please enter a valid email</span>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="loginData.password"
+          required
+          minlength="6"
+          #password="ngModel"
+          placeholder="Enter your password"
+        />
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+          <span *ngIf="password.errors?.['required']">Password is required</span>
+          <span *ngIf="password.errors?.['minlength']">Password must be at least 6 characters</span>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit" [disabled]="loginForm.invalid" class="btn-login">Login</button>
+        <a routerLink="/forgot-password" class="forgot-password">Forgot Password?</a>
+      </div>
+    </form>
+
+    <!-- Signup Link -->
+    <div class="signup-link">
+      <p>Don't have an account? <a routerLink="/register">Sign up</a></p>
+    </div>
+
+    <!-- Social Login -->
+    <div class="social-login" *ngIf="showSocialLogin">
+      <p>Or login with</p>
+      <div class="social-buttons">
+        <button (click)="loginWithGoogle()" class="btn-google">Google</button>
+        <button (click)="loginWithFacebook()" class="btn-facebook">Facebook</button>
+      </div>
+    </div>
+  </div>
+</div>

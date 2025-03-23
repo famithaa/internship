@@ -1,0 +1,73 @@
+<div class="cart-container">
+  <div class="cart-header">
+    <h2>Your Shopping Cart</h2>
+    <span *ngIf="cartItems.length === 0" class="empty-cart-message">Your cart is empty</span>
+  </div>
+
+  <div class="cart-content" *ngIf="cartItems.length > 0">
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of cartItems; let i = index">
+        <div class="item-image">
+          <img [src]="item.imageUrl" [alt]="item.name">
+        </div>
+        <div class="item-details">
+          <h3 class="item-name">{{ item.name }}</h3>
+          <p class="item-description">{{ item.description }}</p>
+          <p class="item-price">${{ item.price.toFixed(2) }}</p>
+          <div class="item-colors" *ngIf="item.color">
+            <span class="color-label">Color:</span>
+            <span class="color-value">{{ item.color }}</span>
+          </div>
+        </div>
+        <div class="item-quantity">
+          <button class="quantity-btn" (click)="decreaseQuantity(i)" [disabled]="item.quantity <= 1">-</button>
+          <input type="number" [value]="item.quantity" (change)="updateQuantity($event, i)" min="1">
+          <button class="quantity-btn" (click)="increaseQuantity(i)">+</button>
+        </div>
+        <div class="item-total">
+          ${{ (item.price * item.quantity).toFixed(2) }}
+        </div>
+        <div class="item-actions">
+          <button class="remove-btn" (click)="removeItem(i)">
+            <span class="material-icons">delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <div class="summary-row subtotal">
+        <span>Subtotal:</span>
+        <span>${{ calculateSubtotal().toFixed(2) }}</span>
+      </div>
+      <div class="summary-row shipping">
+        <span>Shipping:</span>
+        <span *ngIf="calculateSubtotal() > freeShippingThreshold">Free</span>
+        <span *ngIf="calculateSubtotal() <= freeShippingThreshold">${{ shippingCost.toFixed(2) }}</span>
+      </div>
+      <div class="summary-row" *ngIf="calculateSubtotal() <= freeShippingThreshold">
+        <span class="free-shipping-note">Add ${{ (freeShippingThreshold - calculateSubtotal()).toFixed(2) }} more for free shipping</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total:</span>
+        <span>${{ calculateTotal().toFixed(2) }}</span>
+      </div>
+      <div class="cart-actions">
+        <button class="continue-shopping" (click)="continueShopping()">Continue Shopping</button>
+        <button class="checkout-btn" (click)="checkout()" [disabled]="cartItems.length === 0">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="recommended-products" *ngIf="recommendedProducts.length > 0">
+    <h3>You might also like</h3>
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let product of recommendedProducts">
+        <img [src]="product.imageUrl" [alt]="product.name">
+        <h4>{{ product.name }}</h4>
+        <p class="product-price">${{ product.price.toFixed(2) }}</p>
+        <button class="add-to-cart-btn" (click)="addToCart(product)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+/* Top Banner */
+.top-banner {
+    background-color: #C3716B; // Black background
+    color: #fff; // White text
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  /* Main Navbar */
+  .navbar {
+    background-color: #b1aa9b; // White background
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow
+    padding: 20px 0;
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 24px;
+    color: #C7C0B0; // Black text
+  }
+  
+  .nav-link {
+    color: #555; // Gray text
+    font-weight: 500;
+    margin: 0 10px;
+    &:hover {
+      color: #000; // Black text on hover
+    }
+  }
+  
+  /* Dropdown Menu */
+  .dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Add shadow to dropdown
+  }
+  
+  /* Cart Icon */
+  .fa-shopping-cart {
+    font-size: 1.2rem; // Increase cart icon size
+  }
+  /* Search Bar */
+.d-flex {
+  display: flex;
+  align-items: center;
+
+  .form-control {
+    width: 200px; // Adjust width as needed
+  }
+
+  .btn-outline-success {
+    margin-left: 10px;
+  }
+}
