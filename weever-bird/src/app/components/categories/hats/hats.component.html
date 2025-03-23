@@ -1,0 +1,10 @@
+<div class="hats">
+    <h2>Hats & Accessories</h2>
+    <div class="product-list">
+      <div *ngFor="let hat of hats" class="product-card">
+        <img [src]="hat.image" [alt]="hat.name" />
+        <h3>{{ hat.name }}</h3>
+        <p>{{ hat.price | currency }}</p>
+      </div>
+    </div>
+  </div>

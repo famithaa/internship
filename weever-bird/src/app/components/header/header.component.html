@@ -1,0 +1,80 @@
+<!-- Top Banner -->
+<div class="top-banner">
+  FREE SHIPPING ON ORDERS OVER 500 RUPPEES
+</div>
+
+<!-- Main Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <!-- Brand Logo -->
+    <a class="navbar-brand" routerLink="/">WEEVER BIRD</a>
+
+    <!-- Toggle Button for Mobile -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Shop -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/shop">SHOP</a>
+        </li>
+
+        <!-- About -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">ABOUT</a>
+        </li>
+
+        <!-- Categories Dropdown -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            CATEGORIES
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="/category/hats">Hats & Accessories</a></li>
+            <li><a class="dropdown-item" routerLink="/category/clothing">Clothing</a></li>
+            <li><a class="dropdown-item" routerLink="/category/toys">Toys</a></li>
+            <li><a class="dropdown-item" routerLink="/category/home-decor">Home Decor</a></li>
+            <li><a class="dropdown-item" routerLink="/category/bags">Bags & Cases</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Search Link -->
+      <div class="navbar-nav">
+        <a class="nav-link" routerLink="/search">
+          <i class="fas fa-search"></i> SEARCH
+        </a>
+      </div>
+
+      <!-- Sign Up/Login -->
+      <div class="navbar-nav">
+        <a class="nav-link" routerLink="/login">LOGIN</a>
+      </div>
+
+      <!-- Cart -->
+      <div class="navbar-nav">
+        <a class="nav-link" routerLink="/cart">
+          <i class="fas fa-shopping-cart"></i> CART (0)
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

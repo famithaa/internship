@@ -1,0 +1,33 @@
+<div class="search-page">
+  <h1>Search</h1>
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Type here"
+      [(ngModel)]="searchQuery"
+      (input)="onSearchInput()"
+    />
+  </div>
+
+  <div class="suggestions">
+    <h2>Shopping Suggestions</h2>
+    <ul>
+      <li>Beanie Baby Set</li>
+      <li>Shirt</li>
+      <li>Toys (Bunny, Teddy)</li>
+      <li>Macrame Wall Art</li>
+      <li>Macrame Ceiling Hangings</li>
+      <li>Crop Top</li>
+      <li>Table Runner</li>
+      <li>Lap Cover</li>
+      <li>EarPod Case</li>
+      <li>Macrame Keychain</li>
+      <li>Bags</li>
+    </ul>
+  </div>
+
+  <div class="contact-info">
+    <a routerLink="/contact">Contact Us</a>
+    <a routerLink="/faq">FAQ</a>
+  </div>
+</div>

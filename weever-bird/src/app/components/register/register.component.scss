@@ -1,0 +1,217 @@
+/* Main container styling */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #F8F9FA;
+  font-family: 'Roboto', Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Card styling */
+.register-card {
+  width: 100%;
+  max-width: 450px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(195, 113, 107, 0.15);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-card h2 {
+  color: #C3716B;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #F8F9FA;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #C3716B;
+  box-shadow: 0 0 0 3px rgba(195, 113, 107, 0.2);
+}
+
+.form-group input.ng-invalid.ng-touched,
+.form-group input.invalid {
+  border-color: #ff5252;
+}
+
+/* Checkbox styling */
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  min-width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: #C3716B;
+}
+
+.checkbox-group label {
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.checkbox-group a {
+  color: #C3716B;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.checkbox-group a:hover {
+  text-decoration: underline;
+}
+
+/* Error message styling */
+.error-message {
+  color: #ff5252;
+  font-size: 12px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* Button styling */
+.form-actions {
+  margin-top: 30px;
+}
+
+.btn-register {
+  width: 100%;
+  padding: 14px;
+  background-color: #C3716B;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-register:hover {
+  background-color: #b05f59;
+}
+
+.btn-register:active {
+  transform: translateY(1px);
+}
+
+.btn-register:disabled {
+  background-color: #e0b3b0;
+  cursor: not-allowed;
+}
+
+/* Login link styling */
+.login-link {
+  text-align: center;
+  margin-top: 24px;
+  color: #666;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #C3716B;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Social login section */
+.social-register {
+  margin-top: 30px;
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.social-register p {
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn-google,
+.btn-facebook {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  max-width: 130px;
+}
+
+.btn-google:hover,
+.btn-facebook:hover {
+  background-color: #F8F9FA;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .register-card {
+    padding: 20px 15px;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="password"] {
+    padding: 10px 14px;
+  }
+  
+  .btn-register {
+    padding: 12px;
+  }
+}
+
+/* Focus states for accessibility */
+input:focus-visible,
+button:focus-visible {
+  outline: 2px solid #C3716B;
+  outline-offset: 2px;
+}
