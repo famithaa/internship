@@ -9,37 +9,20 @@ $light-gray: #f3f3f3;
 $border-radius: 8px;
 $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-// Animation durations
-$fast-transition: 0.3s;
-$medium-transition: 0.5s;
-$slow-transition: 0.8s;
-
-// Keyframes for animations
+// Animations
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
+  0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
 }
 
 @keyframes shimmer {
   0% { background-position: -100% 0; }
   100% { background-position: 100% 0; }
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-@keyframes rotateIcon {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 
 // Global styles
@@ -49,52 +32,28 @@ $slow-transition: 0.8s;
   padding: 2rem;
   color: $text-color;
   font-family: 'Roboto', sans-serif;
-  animation: fadeIn $medium-transition ease-out;
+  animation: fadeIn 0.5s ease-out;
 }
 
-// Header section
+// Header
 .shop-header {
   text-align: center;
   margin-bottom: 3rem;
   position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.3) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    animation: shimmer 3s infinite linear;
-    transform: rotate(30deg);
-    pointer-events: none;
-    z-index: 1;
-  }
 
   h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     color: $primary-color;
-    position: relative;
     display: inline-block;
-    z-index: 2;
 
     &::after {
       content: '';
-      position: absolute;
-      left: 0;
-      bottom: -5px;
+      display: block;
       width: 0;
       height: 3px;
-      background-color: $primary-color;
-      transition: width $medium-transition ease;
+      background: $primary-color;
+      transition: width 0.5s ease;
     }
 
     &:hover::after {
@@ -106,10 +65,7 @@ $slow-transition: 0.8s;
     font-size: 1.2rem;
     color: color.adjust($text-color, $lightness: -10%);
     opacity: 0;
-    animation: fadeIn $medium-transition ease-out forwards;
-    animation-delay: 0.3s;
-    z-index: 2;
-    position: relative;
+    animation: fadeIn 0.5s ease-out 0.3s forwards;
   }
 }
 
@@ -117,51 +73,27 @@ $slow-transition: 0.8s;
 .category-filter {
   display: flex;
   justify-content: center;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 3rem;
 
   button {
-    background-color: $light-gray;
+    background: $light-gray;
     border: none;
     padding: 0.8rem 1.5rem;
     border-radius: $border-radius;
     font-size: 1rem;
     cursor: pointer;
-    transition: all $fast-transition ease;
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        to right,
-        transparent 0%,
-        rgba(255, 255, 255, 0.3) 50%,
-        transparent 100%
-      );
-      transition: left $fast-transition ease-out;
-    }
+    transition: background 0.3s ease, transform 0.3s ease;
 
     &:hover {
-      background-color: color.adjust($light-gray, $lightness: -10%);
+      background: color.adjust($light-gray, $lightness: -10%);
       transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-
-      &::before {
-        left: 100%;
-      }
     }
 
     &.active {
-      background-color: $primary-color;
+      background: $primary-color;
       color: white;
-      animation: pulse 2s infinite ease-in-out;
+      animation: pulse 2s infinite;
     }
   }
 }
@@ -169,452 +101,102 @@ $slow-transition: 0.8s;
 // Products grid
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
   margin-bottom: 4rem;
 
-  // Staggered animation for products
-  @for $i from 1 through 20 {
-    .product-card:nth-child(#{$i}) {
-      animation: fadeIn $medium-transition ease-out forwards;
-      animation-delay: $i * 0.1s;
-      opacity: 0;
-    }
-  }
-}
-
-// Product card
-.product-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: $border-radius;
-  overflow: hidden;
-  box-shadow: $shadow;
-  transition: all $medium-transition ease;
-  background-color: white;
-  position: relative;
-
-  &:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-
-    .product-info h2 {
-      color: color.adjust($primary-color, $lightness: -15%);
-    }
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(to right, $primary-color, $secondary-color);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform $medium-transition ease;
-  }
-
-  &:hover::before {
-    transform: scaleX(1);
-  }
-
-  .product-image {
-    height: 400px;
+  .product-card {
+    border-radius: $border-radius;
     overflow: hidden;
-    position: relative;
+    box-shadow: $shadow;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform $slow-transition ease, filter $medium-transition ease;
-
-      &:hover {
-        transform: scale(1.1) rotate(1deg);
-        filter: brightness(1.1);
-      }
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        to bottom,
-        transparent 70%,
-        rgba(0, 0, 0, 0.5) 100%
-      );
-      opacity: 0;
-      transition: opacity $medium-transition ease;
-    }
-
-    &:hover::after {
-      opacity: 1;
-    }
-    
-    // Quick view button that appears on hover
-    .quick-view {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background-color: rgba(255, 255, 255, 0.9);
-      color: $primary-color;
-      padding: 0.8rem 1.2rem;
-      border-radius: $border-radius;
-      font-weight: bold;
-      z-index: 10;
-      cursor: pointer;
-      transition: all $fast-transition ease;
-      border: none;
-      
-      &:hover {
-        background-color: white;
-      }
-    }
-    
-    &:hover .quick-view {
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
-
-  .product-info {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    transition: transform $fast-transition ease;
-    
     &:hover {
-      transform: translateY(-5px);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     }
 
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: $primary-color;
-      transition: color $fast-transition ease;
-      position: relative;
-      display: inline-block;
-      
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background-color: currentColor;
-        transition: width $medium-transition ease;
-      }
-      
-      &:hover::after {
-        width: 100%;
-      }
-    }
-
-    .price {
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: $text-color;
-      transition: color $fast-transition ease;
-      
-      &:hover {
-        color: $primary-color;
-        animation: pulse 1s infinite;
-      }
-    }
-
-    .description {
-      margin-bottom: 1rem;
-      line-height: 1.6;
-      flex-grow: 1;
-      position: relative;
+    .product-image {
+      height: 300px;
       overflow: hidden;
-      transition: all $fast-transition ease;
-      
-      &:hover {
-        color: color.adjust($text-color, $lightness: -20%);
-      }
-    }
 
-    .materials {
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
-      color: color.adjust($text-color, $lightness: 10%);
-      transition: all $fast-transition ease;
-
-      span:first-child {
-        font-weight: bold;
-        margin-right: 0.5rem;
-      }
-      
-      &:hover {
-        color: $primary-color;
-      }
-    }
-
-    .add-to-cart {
-      background-color: $primary-color;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: $border-radius;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all $fast-transition ease;
-      align-self: flex-start;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
+      img {
         width: 100%;
         height: 100%;
-        background: linear-gradient(
-          to right,
-          transparent 0%,
-          rgba(255, 255, 255, 0.4) 50%,
-          transparent 100%
-        );
-        transition: left $fast-transition ease-out;
-        z-index: -1;
-      }
+        object-fit: cover;
+        transition: transform 0.8s ease;
 
-      &:hover {
-        background-color: color.adjust($primary-color, $lightness: -10%);
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-
-        &::before {
-          left: 100%;
+        &:hover {
+          transform: scale(1.1);
         }
       }
-      
-      &:active {
-        transform: translateY(1px);
-      }
-      
-      // Add to cart icon
-      .cart-icon {
-        margin-right: 0.5rem;
-        transition: transform $fast-transition ease;
-      }
-      
-      &:hover .cart-icon {
-        animation: rotateIcon $fast-transition linear;
-      }
     }
-  }
-  
-  // Badge for new or sale items
-  .badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: $border-radius;
-    font-weight: bold;
-    z-index: 5;
-    animation: pulse 2s infinite;
-    
-    &.new {
-      background-color: $accent-color;
-      color: $primary-color;
-    }
-    
-    &.sale {
-      background-color: #e53935;
-      color: white;
+
+    .product-info {
+      padding: 1.5rem;
+
+      h2 {
+        font-size: 1.5rem;
+        color: $primary-color;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: color.adjust($primary-color, $lightness: -15%);
+        }
+      }
+
+      .price {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: $text-color;
+      }
+
+      .add-to-cart {
+        background: $primary-color;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: $border-radius;
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background: color.adjust($primary-color, $lightness: -10%);
+        }
+      }
     }
   }
 }
 
-// Shop info section
+// Shop info
 .shop-info {
-  background-color: $accent-color;
+  background: $accent-color;
   padding: 2rem;
   border-radius: $border-radius;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   box-shadow: $shadow;
-  transition: transform $medium-transition ease, box-shadow $medium-transition ease;
-  position: relative;
-  overflow: hidden;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  }
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.3) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    animation: shimmer 4s infinite linear;
-    transform: rotate(30deg);
-    pointer-events: none;
-  }
 
   .info-section {
     h3 {
       color: $primary-color;
       margin-bottom: 1rem;
-      font-size: 1.3rem;
-      position: relative;
-      display: inline-block;
-      transition: transform $fast-transition ease;
-
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -5px;
-        width: 0;
-        height: 2px;
-        background-color: $primary-color;
-        transition: width $medium-transition ease;
-      }
-      
-      &:hover {
-        transform: translateX(5px);
-        
-        &::after {
-          width: 100%;
-        }
-      }
-    }
-
-    p {
-      margin-bottom: 0.8rem;
-      line-height: 1.5;
-      transition: all $fast-transition ease;
-      
-      &:hover {
-        color: color.adjust($text-color, $lightness: -20%);
-        transform: translateX(5px);
-      }
     }
 
     .contact-button {
-      background-color: $primary-color;
+      background: $primary-color;
       color: white;
       border: none;
       padding: 0.7rem 1.2rem;
       border-radius: $border-radius;
       cursor: pointer;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-      transition: all $fast-transition ease;
-      position: relative;
-      overflow: hidden;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          to right,
-          transparent 0%,
-          rgba(255, 255, 255, 0.4) 50%,
-          transparent 100%
-        );
-        transition: left $fast-transition ease-out;
-      }
+      transition: background 0.3s ease;
 
       &:hover {
-        background-color: color.adjust($primary-color, $lightness: -10%);
-        transform: translateY(-3px) scale(1.05);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-
-        &::before {
-          left: 100%;
-        }
-      }
-      
-      &:active {
-        transform: translateY(1px);
+        background: color.adjust($primary-color, $lightness: -10%);
       }
     }
-    
-    // Social media links with hover effects
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-      
-      a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 50%;
-        background-color: white;
-        color: $primary-color;
-        transition: all $fast-transition ease;
-        
-        &:hover {
-          background-color: $primary-color;
-          color: white;
-          transform: translateY(-5px);
-          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-          animation: float 2s infinite ease-in-out;
-        }
-      }
-    }
-  }
-}
-
-// Toast notification for add to cart
-.toast-notification {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  background-color: white;
-  color: $text-color;
-  padding: 1rem;
-  border-radius: $border-radius;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transform: translateY(100px);
-  opacity: 0;
-  z-index: 1000;
-  transition: all $fast-transition ease;
-  
-  &.show {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  
-  .success-icon {
-    color: #4caf50;
-    font-size: 1.5rem;
   }
 }
 
@@ -626,52 +208,5 @@ $slow-transition: 0.8s;
 
   .shop-header h1 {
     font-size: 2rem;
-  }
-  
-  .product-card:hover {
-    transform: translateY(-5px) scale(1.01);
-  }
-}
-
-// Loading animation for products
-.loading-shimmer {
-  background: linear-gradient(
-    to right,
-    $light-gray 8%,
-    darken($light-gray, 5%) 18%,
-    $light-gray 33%
-  );
-  background-size: 1000px 100%;
-  animation: shimmer 1.5s infinite linear;
-}
-
-// Back to top button
-.back-to-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background-color: $primary-color;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all $fast-transition ease;
-  z-index: 99;
-  
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  &:hover {
-    background-color: color.adjust($primary-color, $lightness: -10%);
-    transform: translateY(-5px);
-    animation: pulse 2s infinite;
   }
 }

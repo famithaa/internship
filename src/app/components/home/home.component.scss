@@ -18,8 +18,9 @@
 }
 
 .collage-row {
+  border-radius: 50px;
   display: flex;
-  gap: 10px; // Space between images
+  // Space between images
 }
 
 .collage-item {
@@ -38,18 +39,10 @@
 @media (max-width: 768px) {
   .collage-row {
     flex-direction: column; // Stack images vertically on small screens
-    gap: 20px; // Increase space between stacked images
   }
 
   .collage-item {
-    width: 100%; // Ensure full width on mobile
-    height: 300px; // Set a fixed height for vertically long images
-    margin-bottom: 0; // Remove margin-bottom since gap is used
-    display: none; // Hide all images by default on mobile
-  }
-
-  /* Show only the first image on mobile */
-  .collage-item:first-child {
-    display: block; // Show the first image
+    margin-bottom: 10px; // Add space between stacked images
+    height: 300px; // Set a fixed height for vertically long images on mobile
   }
 }
