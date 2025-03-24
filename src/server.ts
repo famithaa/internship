@@ -11,20 +11,24 @@ import { fileURLToPath } from 'node:url';
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 
-const app = express();
-const angularApp = new AngularNodeAppEngine();
+// Define getPrerenderParams here
+export function getPrerenderParams() {
+  return [
+    { id: '1' },
+    { id: '2' },
+    { id: '3' },
+    { id: '4' },
+    { id: '5' },
+    { id: '6' },
+    { id: '7' },
+    { id: '8' },
+    { id: '9' },
+    // Add more IDs as needed
+  ];
+}
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+const app = express();
+const angularApp = new AngularNodeAppEngine(); // No arguments passed here
 
 /**
  * Serve static files from /browser
@@ -42,7 +46,12 @@ app.use(
  */
 app.use('/**', (req, res, next) => {
   angularApp
-    .handle(req)
+    .handle(req, {
+      // Pass getPrerenderParams here
+      prerender: {
+        getPrerenderParams,
+      },
+    })
     .then((response) =>
       response ? writeResponseToNodeResponse(response, res) : next(),
     )

@@ -108,7 +108,7 @@ export class ShopComponent implements OnInit {
       price: 550,
       description: 'Handmade crochet red corset top with white ruffled edges and pearl buttons for a vintage, elegant look. Perfect for casual wear, festive occasions, or gifting!',
       imagePath: 'https://i.pinimg.com/474x/c3/15/0a/c3150ade81e17502a705669779b4097d.jpg',
-      category: 'accessories',
+      category: 'clothing',
       materials: ['cotton yarn'],
       available: true,
     },

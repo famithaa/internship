@@ -14,7 +14,11 @@ import { RegisterComponent } from './components/register/register.component';
 import {ProductDetailComponent} from './components/product-detail/product-detail.component'
 
 export const routes: Routes = [
-  { path: 'product/:id', component: ProductDetailComponent }, // Add this route
+  {
+    path: 'product/:id',
+    component: ProductDetailComponent,
+    data: { renderMode: 'prerender' }, // Enable prerendering for this route
+  }, // Add this route
   { path: 'register', component: RegisterComponent }, // Register route
   { path: '', component: HomeComponent }, // Default route (Home)
   { path: 'shop', component: ShopComponent }, // Shop page
