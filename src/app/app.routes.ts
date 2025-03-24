@@ -11,8 +11,10 @@ import { HomeDecorComponent } from './components/categories/home-decor/home-deco
 import { BagsComponent } from './components/categories/bags/bags.component';
 import { SearchComponent } from './components/search/search.component';
 import { RegisterComponent } from './components/register/register.component';
+import {ProductDetailComponent} from './components/product-detail/product-detail.component'
 
 export const routes: Routes = [
+  { path: 'product/:id', component: ProductDetailComponent }, // Add this route
   { path: 'register', component: RegisterComponent }, // Register route
   { path: '', component: HomeComponent }, // Default route (Home)
   { path: 'shop', component: ShopComponent }, // Shop page

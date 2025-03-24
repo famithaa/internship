@@ -13,7 +13,7 @@
         <div class="item-details">
           <h3 class="item-name">{{ item.name }}</h3>
           <p class="item-description">{{ item.description }}</p>
-          <p class="item-price">${{ item.price.toFixed(2) }}</p>
+          <p class="item-price">Rs.{{ item.price.toFixed(2) }}</p>
           <div class="item-colors" *ngIf="item.color">
             <span class="color-label">Color:</span>
             <span class="color-value">{{ item.color }}</span>
@@ -25,7 +25,7 @@
           <button class="quantity-btn" (click)="increaseQuantity(i)">+</button>
         </div>
         <div class="item-total">
-          ${{ (item.price * item.quantity).toFixed(2) }}
+          Rs.{{ (item.price * item.quantity).toFixed(2) }}
         </div>
         <div class="item-actions">
           <button class="remove-btn" (click)="removeItem(i)">
@@ -38,19 +38,19 @@
     <div class="cart-summary">
       <div class="summary-row subtotal">
         <span>Subtotal:</span>
-        <span>${{ calculateSubtotal().toFixed(2) }}</span>
+        <span>Rs.{{ calculateSubtotal().toFixed(2) }}</span>
       </div>
       <div class="summary-row shipping">
         <span>Shipping:</span>
         <span *ngIf="calculateSubtotal() > freeShippingThreshold">Free</span>
-        <span *ngIf="calculateSubtotal() <= freeShippingThreshold">${{ shippingCost.toFixed(2) }}</span>
+        <span *ngIf="calculateSubtotal() <= freeShippingThreshold">Rs.{{ shippingCost.toFixed(2) }}</span>
       </div>
       <div class="summary-row" *ngIf="calculateSubtotal() <= freeShippingThreshold">
-        <span class="free-shipping-note">Add ${{ (freeShippingThreshold - calculateSubtotal()).toFixed(2) }} more for free shipping</span>
+        <span class="free-shipping-note">Add Rs.{{ (freeShippingThreshold - calculateSubtotal()).toFixed(2) }} more for free shipping</span>
       </div>
       <div class="summary-row total">
         <span>Total:</span>
-        <span>${{ calculateTotal().toFixed(2) }}</span>
+        <span>Rs.{{ calculateTotal().toFixed(2) }}</span>
       </div>
       <div class="cart-actions">
         <button class="continue-shopping" (click)="continueShopping()">Continue Shopping</button>
@@ -65,7 +65,7 @@
       <div class="product-card" *ngFor="let product of recommendedProducts">
         <img [src]="product.imageUrl" [alt]="product.name">
         <h4>{{ product.name }}</h4>
-        <p class="product-price">${{ product.price.toFixed(2) }}</p>
+        <p class="product-price">Rs.{{ product.price.toFixed(2) }}</p>
         <button class="add-to-cart-btn" (click)="addToCart(product)">Add to Cart</button>
       </div>
     </div>

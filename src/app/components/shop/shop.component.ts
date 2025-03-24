@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Import CommonModule
+import { Router } from '@angular/router'; 
 
 interface Product {
   id: number;
@@ -24,7 +25,7 @@ export class ShopComponent implements OnInit {
     {
       id: 1,
       name: 'Crochet Bunny',
-      price: 25.99,
+      price: 259,
       description: 'Handmade white crochet bunny with embroidered face. Perfect gift for babies and children. Made with hypoallergenic materials.',
       imagePath: 'https://i.pinimg.com/736x/ce/56/ef/ce56ef386c12c10aa28a62075239aa1a.jpg',
       category: 'toys',
@@ -34,7 +35,7 @@ export class ShopComponent implements OnInit {
     {
       id: 2,
       name: 'Baby Booties',
-      price: 18.5,
+      price: 185,
       description: 'Cozy gray crochet booties for babies. Keeps little feet warm and adds adorable style to any outfit.',
       imagePath: 'https://i.pinimg.com/736x/8b/65/e5/8b65e52186036836352908f090e7d94d.jpg',
       category: 'baby',
@@ -44,7 +45,7 @@ export class ShopComponent implements OnInit {
     {
       id: 3,
       name: 'Bear Hat',
-      price: 22.0,
+      price: 220,
       description: 'Cute gray crochet bear hat with ears. Perfect for keeping little ones warm during colder months.',
       imagePath: 'https://i.pinimg.com/474x/fa/0e/b1/fa0eb1c5a57e9fe84e843a6b18554b24.jpg',
       category: 'baby',
@@ -54,7 +55,7 @@ export class ShopComponent implements OnInit {
     {
       id: 4,
       name: 'Red Shrug',
-      price: 45.99,
+      price: 459,
       description: 'Stylish red crochet shrug with black trim. This versatile piece adds a pop of color to any outfit.',
       imagePath: 'https://i.pinimg.com/736x/22/a6/d9/22a6d98811054505fb2ec24889673251.jpg',
       category: 'clothing',
@@ -64,7 +65,7 @@ export class ShopComponent implements OnInit {
     {
       id: 5,
       name: 'Two-Tone Tote Bag',
-      price: 35.5,
+      price: 350,
       description: 'Trendy black and yellow crochet tote bag. Spacious and stylish for everyday use.',
       imagePath: 'https://i.pinimg.com/736x/db/6b/33/db6b33edb3c9c6b3f1d871fe909c3b4c.jpg',
       category: 'accessories',
@@ -74,7 +75,7 @@ export class ShopComponent implements OnInit {
     {
       id: 6,
       name: 'Macrame Wall hanging',
-      price: 35.5,
+      price: 555,
       description: 'Trendy black and yellow crochet tote bag. Spacious and stylish for everyday use.',
       imagePath: 'https://i.pinimg.com/474x/d0/28/67/d028670a245083c51e262cede1ce7510.jpg',
       category: 'decor',
@@ -84,7 +85,7 @@ export class ShopComponent implements OnInit {
     {
       id: 7,
       name: 'Macrame key  chains',
-      price: 35.5,
+      price: 55,
       description: 'Trendy black and yellow crochet tote bag. Spacious and stylish for everyday use.',
       imagePath: 'https://i.pinimg.com/474x/03/59/65/035965b07cc7c47e0d063767bfe1457b.jpg',
       category: 'accessories',
@@ -97,7 +98,8 @@ export class ShopComponent implements OnInit {
   categories: string[] = [];
   selectedCategory: string = 'all';
 
-  constructor() {}
+  constructor(private router: Router) {} // Inject Router
+
 
   ngOnInit(): void {
     this.filteredProducts = [...this.products];
@@ -105,6 +107,7 @@ export class ShopComponent implements OnInit {
     const categorySet = new Set<string>();
     this.products.forEach((product) => categorySet.add(product.category));
     this.categories = Array.from(categorySet);
+    
   }
 
   filterByCategory(category: string): void {
@@ -120,8 +123,12 @@ export class ShopComponent implements OnInit {
   }
 
   addToCart(product: Product): void {
-    console.log(`${product.name} added to cart`);
+    console.log(`Rs.{product.name} added to cart`);
     // Here you would typically call a cart service to add the item
-    alert(`${product.name} added to cart!`);
+    alert(`Rs.{product.name} added to cart!`);
+  }
+  viewProductDetails(productId: number): void {
+    this.router.navigate(['/product', productId]); // Navigate to product details page
   }
 }
+

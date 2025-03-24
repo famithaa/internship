@@ -34,8 +34,8 @@ interface Product {
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   recommendedProducts: Product[] = [];
-  freeShippingThreshold = 75; // Free shipping for orders over $75
-  shippingCost = 8.99;
+  freeShippingThreshold = 500; // Free shipping for orders over 500 Rupees
+  shippingCost = 59;
 
   constructor(
     private cartService: CartService,
@@ -51,14 +51,22 @@ export class CartComponent implements OnInit {
   loadCartItems(): void {
     // Assuming getCartItems returns an Observable<CartItem[]>
     this.cartService.getCartItems().subscribe((items: CartItem[]) => {
-      this.cartItems = items;
+      // Assign the provided image link to all cart items
+      this.cartItems = items.map(item => ({
+        ...item,
+        imageUrl: 'https://i.pinimg.com/736x/dd/d2/e1/ddd2e15cdc897c31dc501348e721dbe7.jpg'
+      }));
     });
   }
 
   loadRecommendedProducts(): void {
     // Assuming getRecommendedProducts returns an Observable<Product[]>
     this.productService.getRecommendedProducts().subscribe((products: Product[]) => {
-      this.recommendedProducts = products.slice(0, 4); // Limit to 4 recommended products
+      // Assign the provided image link to all recommended products
+      this.recommendedProducts = products.slice(0, 4).map(product => ({
+        ...product,
+        imageUrl: 'https://i.pinimg.com/736x/dd/d2/e1/ddd2e15cdc897c31dc501348e721dbe7.jpg'
+      }));
     });
   }
 
@@ -119,7 +127,7 @@ export class CartComponent implements OnInit {
         description: product.description,
         price: product.price,
         quantity: 1,
-        imageUrl: product.imageUrl
+        imageUrl: 'https://i.pinimg.com/736x/dd/d2/e1/ddd2e15cdc897c31dc501348e721dbe7.jpg'
       };
       this.cartItems.push(newItem);
     }

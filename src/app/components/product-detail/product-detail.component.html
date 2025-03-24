@@ -1,16 +1,116 @@
-<div *ngIf="product; else loading">
-    <div class="row">
-      <div class="col-md-6">
-        <img [src]="product.image" class="img-fluid" [alt]="product.name">
+<div class="product-detail-container" *ngIf="product">
+  <div class="breadcrumbs">
+    <a [routerLink]="['/']">Home</a> &gt;
+    <a [routerLink]="['/shop']">Shop</a> &gt;
+    <span>{{ product.name }}</span>
+  </div>
+
+  <div class="product-main">
+    <div class="product-image">
+      <img [src]="product.imagePath" [alt]="product.name">
+    </div>
+
+    <div class="product-info">
+      <h1 class="product-name">{{ product.name }}</h1>
+      
+      <div class="product-category">
+        <span class="category-label">Category:</span>
+        <span class="category-value">{{ product.category | titlecase }}</span>
       </div>
-      <div class="col-md-6">
-        <h2>{{ product.name }}</h2>
-        <p>{{ product.price | currency }}</p>
-        <p>{{ product.description }}</p>
-        <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
+
+      <div class="product-price">
+        <span class="price-label">Price:</span>
+        <span class="current-price">Rs.{{ product.price.toFixed(2) }}</span>
+        <span class="availability" [ngClass]="getAvailabilityClass()">
+          {{ getAvailabilityText() }}
+        </span>
+      </div>
+
+      <div class="product-actions" *ngIf="product.available">
+        <div class="quantity-selector">
+          <button class="quantity-btn" (click)="decreaseQuantity()">-</button>
+          <input type="number" [value]="selectedQuantity" readonly>
+          <button class="quantity-btn" (click)="increaseQuantity()">+</button>
+        </div>
+        <button class="add-to-cart-btn" (click)="addToCart()">
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="out-of-stock-message" *ngIf="!product.available">
+        <p>This item is currently out of stock. Please check back later or contact us for custom orders.</p>
+        <button class="contact-btn">Contact for Custom Order</button>
+      </div>
+
+      <div class="product-tabs">
+        <div class="tab-buttons">
+          <button [ngClass]="{'active': activeTab === 'description'}" (click)="setActiveTab('description')">Description</button>
+          <button [ngClass]="{'active': activeTab === 'materials'}" (click)="setActiveTab('materials')">Materials</button>
+          <button [ngClass]="{'active': activeTab === 'care'}" (click)="setActiveTab('care')">Care Instructions</button>
+        </div>
+
+        <div class="tab-content">
+          <div *ngIf="activeTab === 'description'" class="description-tab">
+            <p>{{ product.description }}</p>
+            <p>Each item is lovingly handcrafted and may have slight variations, making your piece truly unique.</p>
+          </div>
+
+          <div *ngIf="activeTab === 'materials'" class="materials-tab">
+            <h3>Materials Used:</h3>
+            <ul>
+              <li *ngFor="let material of product.materials">{{ material }}</li>
+            </ul>
+            <p>All materials are carefully selected for quality and comfort. If you have specific material sensitivities or preferences, please contact me for custom options.</p>
+          </div>
+
+          <div *ngIf="activeTab === 'care'" class="care-tab">
+            <h3>Care Instructions:</h3>
+            <ul>
+              <li>Hand wash in cold water with mild soap</li>
+              <li>Gently squeeze out excess water (do not wring)</li>
+              <li>Lay flat to dry on a clean towel</li>
+              <li>Reshape while damp if needed</li>
+              <li>Store in a cool, dry place away from direct sunlight</li>
+            </ul>
+            <p>Proper care will ensure your handmade item stays beautiful for years to come.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="customization">
+        <h3>Custom Orders</h3>
+        <p>Looking for something similar in a different color or size? I'm happy to create a custom piece just for you!</p>
+        <button class="custom-order-btn">Request Custom Order</button>
       </div>
     </div>
   </div>
-  <ng-template #loading>
-    <p>Loading...</p>
-  </ng-template>
+
+  <div class="related-products" *ngIf="relatedProducts.length > 0">
+    <h2>You May Also Like</h2>
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let relatedProduct of relatedProducts" [routerLink]="['/product', relatedProduct.id]">
+        <div class="product-image">
+          <img [src]="relatedProduct.imagePath" [alt]="relatedProduct.name">
+        </div>
+        <div class="product-info">
+          <h3>{{ relatedProduct.name }}</h3>
+          <p class="price">Rs.{{ relatedProduct.price.toFixed(2) }}</p>
+          <button class="view-details-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shop-info">
+    <div class="info-section">
+      <h3>Shipping Information</h3>
+      <p>All items are typically shipped within 1-3 business days after payment.</p>
+      <p>International shipping is available!</p>
+    </div>
+
+    <div class="info-section">
+      <h3>Return Policy</h3>
+      <p>If you're not completely satisfied with your purchase, please contact me within 7 days of receiving your item.</p>
+    </div>
+  </div>
+</div>
