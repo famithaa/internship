@@ -11,25 +11,33 @@ import { HomeDecorComponent } from './components/categories/home-decor/home-deco
 import { BagsComponent } from './components/categories/bags/bags.component';
 import { SearchComponent } from './components/search/search.component';
 import { RegisterComponent } from './components/register/register.component';
-import {ProductDetailComponent} from './components/product-detail/product-detail.component'
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+
+// Import the getPrerenderParams function from your server file
+import { getPrerenderParams } from '../server';
 
 export const routes: Routes = [
   {
     path: 'product/:id',
     component: ProductDetailComponent,
-    data: { renderMode: 'prerender' }, // Enable prerendering for this route
-  }, // Add this route
-  { path: 'register', component: RegisterComponent }, // Register route
-  { path: '', component: HomeComponent }, // Default route (Home)
-  { path: 'shop', component: ShopComponent }, // Shop page
-  { path: 'about', component: AboutComponent }, // About page
-  { path: 'login', component: LoginComponent }, // Login page
-  { path: 'cart', component: CartComponent }, // Cart page
-  { path: 'category/hats', component: HatsComponent }, // Hats category
-  { path: 'category/clothing', component: ClothingComponent }, // Clothing category
-  { path: 'category/toys', component: ToysComponent }, // Toys category
-  { path: 'category/home-decor', component: HomeDecorComponent }, // Home Decor category
-  { path: 'category/bags', component: BagsComponent }, // Bags category
-  { path: 'search', component: SearchComponent }, // Search page
-  { path: '**', redirectTo: '' }, // Redirect to home for unknown routes
+    // providers: [
+    //   {
+    //     provide: 'PRERENDER_PARAMS',
+    //     useValue: getPrerenderParams
+    //   }
+    // ]
+  },
+  { path: 'register', component: RegisterComponent },
+  { path: '', component: HomeComponent },
+  { path: 'shop', component: ShopComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'category/hats', component: HatsComponent },
+  { path: 'category/clothing', component: ClothingComponent },
+  { path: 'category/toys', component: ToysComponent },
+  { path: 'category/home-decor', component: HomeDecorComponent },
+  { path: 'category/bags', component: BagsComponent },
+  { path: 'search', component: SearchComponent },
+  { path: '**', redirectTo: '' },
 ];

@@ -99,6 +99,26 @@ export class ProductDetailComponent implements OnInit {
       materials: ['cotton yarn'],
       available: true,
     },
+    {
+      id: 8,
+      name: 'corset top',
+      price: 550,
+      description: 'Handmade crochet red corset top with white ruffled edges and pearl buttons for a vintage, elegant look. Perfect for casual wear, festive occasions, or gifting!',
+      imagePath: 'https://i.pinimg.com/474x/c3/15/0a/c3150ade81e17502a705669779b4097d.jpg',
+      category: 'clothing',
+      materials: ['cotton yarn'],
+      available: true,
+    },
+    {
+      id: 9,
+      name: 'tote bag',
+      price: 500,
+      description: 'Stylish and eco-friendly handmade crochet mesh bag, perfect for shopping, beach days, or casual outings. Lightweight, spacious, and durable for everyday use!',
+      imagePath: 'https://i.pinimg.com/474x/63/bf/c2/63bfc22f4eeef8a1dbb2db36759ac8b2.jpg',
+      category: 'accessories',
+      materials: ['cotton yarn'],
+      available: true,
+    },
   ];
 
   constructor(private route: ActivatedRoute) {}

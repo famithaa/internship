@@ -14,7 +14,7 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 // Define getPrerenderParams here
 export function getPrerenderParams() {
   return [
-    { id: '1' },
+    { id: '1' }, // Example parameter for product/:id
     { id: '2' },
     { id: '3' },
     { id: '4' },
@@ -23,12 +23,11 @@ export function getPrerenderParams() {
     { id: '7' },
     { id: '8' },
     { id: '9' },
-    // Add more IDs as needed
   ];
 }
 
 const app = express();
-const angularApp = new AngularNodeAppEngine(); // No arguments passed here
+const angularApp = new AngularNodeAppEngine();
 
 /**
  * Serve static files from /browser
